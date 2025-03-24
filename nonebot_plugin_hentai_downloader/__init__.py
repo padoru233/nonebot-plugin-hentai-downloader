@@ -1,12 +1,11 @@
 import os
-from nonebot import logger, require
+from nonebot import logger
 from nonebot.plugin import PluginMetadata, inherit_supported_adapters
 from nonebot.adapters.onebot.v11 import Bot, MessageEvent, GroupMessageEvent, PrivateMessageEvent
 from nonebot.plugin.on import on_command
 from nonebot.matcher import Matcher
 from nonebot.params import CommandArg, ArgPlainText
 from nonebot.adapters.onebot.v11 import Message
-from .config import Config
 
 __plugin_meta__ = PluginMetadata(
     name="本子下载插件",
@@ -14,15 +13,13 @@ __plugin_meta__ = PluginMetadata(
     usage="下载jm",
     type="application",
     homepage="https://github.com/padoru233/nonebot-plugin-hentai-downloader",
-    config=Config,
-    supported_adapters={"~onebot.v11"},
-    extra={"author": "padoru233"},
+    supported_adapters={"~onebot.v11"}
 )
 
 
 async def upload_group_file(bot, group_id: int, file: str, name: str):
     try:
-        await bot.upload_group_file(group_id=group_id, file=file, name=name)
+        await bot.upload_group_file(group_id=group_id, file="file:///" + file, name=name)
         return True
     except Exception as e:
         logger.error(f"上传群文件失败: {e}")
@@ -30,7 +27,7 @@ async def upload_group_file(bot, group_id: int, file: str, name: str):
 
 async def upload_private_file(bot, user_id: int, file: str, name: str):
     try:
-        await bot.upload_private_file(user_id=user_id, file=file, name=name)
+        await bot.upload_private_file(user_id=user_id, file="file:///" + file, name=name)
         return True
     except Exception as e:
         logger.error(f"上传私聊文件失败: {e}")
@@ -59,7 +56,7 @@ async def got_comic_id(bot: Bot, matcher: Matcher, event: MessageEvent, comic_id
 
     try:
         from .matchers.jm import jm2pdf  # 导入jm2pdf函数
-        pdf_path, file_name = await jm2pdf(comic_id)
+        pdf_path, pdf_name = await jm2pdf(comic_id)
 
         if pdf_path and os.path.exists(pdf_path):
             # 上传PDF文件
@@ -67,10 +64,10 @@ async def got_comic_id(bot: Bot, matcher: Matcher, event: MessageEvent, comic_id
 
             # 根据消息类型选择上传方法
             if isinstance(event, GroupMessageEvent):
-                await upload_group_file(bot, event.group_id, pdf_path, file_name)
+                await upload_group_file(bot, event.group_id, pdf_path, pdf_name)
                 await matcher.finish(f"本子 {comic_id} 已下载并上传完成")
             elif isinstance(event, PrivateMessageEvent):
-                await upload_private_file(bot, event.user_id, pdf_path, file_name)
+                await upload_private_file(bot, event.user_id, pdf_path, pdf_name)
                 await matcher.finish(f"本子 {comic_id} 已下载并上传完成")
 
         else:
