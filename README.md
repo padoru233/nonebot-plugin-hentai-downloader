@@ -6,7 +6,7 @@
 
 <div align="center">
 
-## ✨ nonebot-plugin-hentai-downloader ✨
+## ✨ Nonebot2 本子下载插件 ✨
 
 <a href="./LICENSE">
     <img src="https://img.shields.io/github/license/padoru233/nonebot-plugin-hentai-downloader.svg" alt="license">
@@ -31,7 +31,7 @@
 
 ## 📖 介绍
 
-这里是插件的详细介绍部分
+可拓展，暂时只接入了JM，通过自建 docker API，API正在打包
 
 ## 💿 安装
 
@@ -92,15 +92,17 @@
 
 | 配置项  | 必填  | 默认值 |   说明   |
 | :-----: | :---: | :----: | :------: |
-| 配置项1 |  是   |   无   | 配置说明 |
-| 配置项2 |  否   |   无   | 配置说明 |
+| jm_api_url |  是   |   http://localhost:9080   | JM API 的地址 |
 
 ## 🎉 使用
 ### 指令表
 | 指令  | 权限  | 需要@ | 范围  |   说明   |
 | :---: | :---: | :---: | :---: | :------: |
-| 指令1 | 主人  |  否   | 私聊  | 指令说明 |
-| 指令2 | 群员  |  是   | 群聊  | 指令说明 |
+| 下载jm | 所有人  |  否   | 群聊/私聊  | 指令后+id，bot也可以询问 |
 
 ### 🎨 效果图
 如果有效果图的话
+
+### 🌹 鸣谢
+
+- 由 https://github.com/hect0x7/JMComic-Crawler-Python 实现API
