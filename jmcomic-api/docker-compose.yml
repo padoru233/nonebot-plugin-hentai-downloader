@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  jmcomic-api:
+    image: wananbubu/jmcomic-api:latest
+    ports:
+      - "9080:9080"
+    network_mode: "host"
+    volumes:
+      - /home/API/jmcomic:/app
+    restart: unless-stopped
+    environment:
+      - PORT=9080
+    deploy:
+      resources:
+        limits:
+          memory: 4G
