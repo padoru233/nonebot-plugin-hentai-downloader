@@ -31,7 +31,9 @@
 
 ## 📖 介绍
 
-可拓展，暂时只接入了JM，通过自建 docker API，API正在打包
+- 可拓展，暂时只接入了JM，自建 JM WEB API
+  可上传加密压缩包/PDF
+- 接入PICA WIP
 
 ## 💿 安装
 
@@ -98,11 +100,13 @@
 ### 指令表
 | 指令  | 权限  | 需要@ | 范围  |   说明   |
 | :---: | :---: | :---: | :---: | :------: |
-| 下载jm | 所有人  |  否   | 群聊/私聊  | 指令后+id，bot也可以询问 |
+| 下载jm | 所有人  |  否   | 群聊/私聊  | 指令后+id，bot会询问下载方式 |
 
 ### 🎨 效果图
 如果有效果图的话
 
 ### 🌹 鸣谢
 
-- 由 https://github.com/hect0x7/JMComic-Crawler-Python 实现API
+- 由 https://github.com/hect0x7/JMComic-Crawler-Python 实现 JM API
+- https://github.com/salikx/image2pdf 灵感来源
+- https://github.com/lx1169732264/pica_crawler 实现 PICA API
